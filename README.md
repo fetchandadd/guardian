@@ -9,10 +9,11 @@
 
 ```php
 <?php
+
 // create a new authentication backend which implements the AuthenticationInterface
 $authenticationBackend = new AuthenticationBackend();
 
-// using mindplay-dk/middleman as a dispatcher for the middleware stack
+// using e.g. mindplay-dk/middleman as a dispatcher for the middleware stack
 $response = (new Dispatcher(
     [   
         // inject Guardian with the authentication backend instance
