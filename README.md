@@ -1,7 +1,8 @@
 # Guardian
 
-[![GitHub license](https://img.shields.io/github/license/timtegeler/guardian.svg)]()
 [![Build Status](https://travis-ci.org/timtegeler/guardian.svg?branch=master)](https://travis-ci.org/timtegeler/guardian)
+[![Coverage Status](https://coveralls.io/repos/github/timtegeler/guardian/badge.svg?branch=master)](https://coveralls.io/github/timtegeler/guardian?branch=master)
+[![GitHub license](https://img.shields.io/github/license/timtegeler/guardian.svg)]()
 
 **Guardian** provides a adapter between an authentication backend and your PSR-15 middleware stack
 
