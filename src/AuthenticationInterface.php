@@ -2,6 +2,7 @@
 
 namespace TimTegeler\Guardian;
 
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -16,5 +17,10 @@ interface AuthenticationInterface
      * @return bool
      */
     public function authenticate(ServerRequestInterface $request);
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getAuthenticationFailedResponse();
 
 }

@@ -19,7 +19,7 @@ class GuardianTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->authenticator = $this->getMockBuilder(AuthenticationInterface::class)
+        $this->authenticator = $this->getMockBuilder(AbstractAuthentication::class)
             ->setMethods(['authenticate'])->getMock();
         $this->serverRequest = $this->getMockBuilder(ServerRequestInterface::class)->getMock();
         $this->delegate = $this->getMockBuilder(DelegateInterface::class)->getMock();
