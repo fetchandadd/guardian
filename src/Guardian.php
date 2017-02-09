@@ -14,15 +14,15 @@ use Psr\Http\Message\ServerRequestInterface;
 class Guardian implements MiddlewareInterface
 {
     /**
-     * @var AbstractAuthentication
+     * @var AuthenticationInterface
      */
     private $authentication;
 
     /**
      * Guardian constructor.
-     * @param AbstractAuthentication $authentication
+     * @param AuthenticationInterface $authentication
      */
-    public function __construct(AbstractAuthentication $authentication)
+    public function __construct(AuthenticationInterface $authentication)
     {
         $this->authentication = $authentication;
     }

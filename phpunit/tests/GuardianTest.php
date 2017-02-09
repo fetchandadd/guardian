@@ -2,7 +2,6 @@
 
 namespace TimTegeler\Guardian;
 
-use GuzzleHttp\Psr7\Response;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use PHPUnit_Framework_MockObject_MockObject;
 use Psr\Http\Message\ResponseInterface;
@@ -16,11 +15,13 @@ class GuardianTest extends \PHPUnit_Framework_TestCase
     private $serverRequest;
     /** @var PHPUnit_Framework_MockObject_MockObject|DelegateInterface */
     private $delegate;
+    /** @var PHPUnit_Framework_MockObject_MockObject|ResponseInterface */
+    private $response;
 
     public function setUp()
     {
-        $this->authenticator = $this->getMockBuilder(AbstractAuthentication::class)
-            ->setMethods(['authenticate'])->getMock();
+        $this->authenticator = $this->getMockBuilder(AuthenticationInterface::class)->getMock();
+        $this->response = $this->getMockBuilder(ResponseInterface::class)->getMock();
         $this->serverRequest = $this->getMockBuilder(ServerRequestInterface::class)->getMock();
         $this->delegate = $this->getMockBuilder(DelegateInterface::class)->getMock();
     }
@@ -31,10 +32,13 @@ class GuardianTest extends \PHPUnit_Framework_TestCase
         $this->delegate
             ->method('process')
             ->with($this->equalTo($this->serverRequest))
-            ->willReturn(new Response());
+            ->willReturn($this->response);
         $this->authenticator
             ->method('authenticate')
             ->willReturn(true);
+        $this->response
+            ->method('getStatusCode')
+            ->willReturn(200);
         # actual test
         $guardian = new Guardian($this->authenticator);
         $response = $guardian->process($this->serverRequest, $this->delegate);
@@ -48,6 +52,12 @@ class GuardianTest extends \PHPUnit_Framework_TestCase
         $this->authenticator
             ->method('authenticate')
             ->willReturn(false);
+        $this->authenticator
+            ->method('getAuthenticationFailedResponse')
+            ->willReturn($this->response);
+        $this->response
+            ->method('getStatusCode')
+            ->willReturn(403);
         # actual test
         $guardian = new Guardian($this->authenticator);
         $response = $guardian->process($this->serverRequest, $this->delegate);
