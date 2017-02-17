@@ -27,7 +27,7 @@ $response = (new Dispatcher(
 
 ## Authentication Backend
 
-The focus of Guardian is the adaptation of an authentication backend with a PSR-15 middleware stack. 
+The focus of Guardian is on the adaptation of an authentication backend with a PSR-15 middleware stack. 
 
 This means that Guardian itself is not capable of providing authentication e.g. [Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). But Guardian ships with a simple interface that can be implemented by the authentication backend. The interface consists of two methods. 
  
