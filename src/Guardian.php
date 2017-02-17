@@ -2,7 +2,6 @@
 
 namespace TimTegeler\Guardian;
 
-use GuzzleHttp\Psr7\Response;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -38,7 +37,7 @@ class Guardian implements MiddlewareInterface
         if ($this->authentication->authenticate($request)) {
             return $delegate->process($request);
         } else {
-            return (new Response())->withStatus(403);
+            return $this->authentication->getAuthenticationFailedResponse();
         }
     }
 }
